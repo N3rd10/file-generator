@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Input File Generator</title>
+</head>
+<body>
+    <h1>File Generator</h1>
+    <label for="userInput">Enter some text:</label>
+    <textarea id="userInput" rows="4" cols="50"></textarea><br>
+    <button id="generateButton">Generate File</button>
+    <a id="downloadLink" style="display:none;">Download File</a>
+
+    <script>
+        document.getElementById('generateButton').addEventListener('click', function() {
+            const userInput = document.getElementById('userInput').value;
+            const blob = new Blob([userInput], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const downloadLink = document.getElementById('downloadLink');
+
+            downloadLink.href = url;
+            downloadLink.download = 'user_input.txt'; // Name of the file to be downloaded
+            downloadLink.style.display = 'block'; // Show the download link
+            downloadLink.innerText = 'Download your file';
+        });
+    </script>
+</body>
+</html>
